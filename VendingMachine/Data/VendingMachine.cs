@@ -1,24 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using VendingMachine.Model;
 
 namespace VendingMachine
 {
-    public class VendingMachine : IVending
+    class VendingMachine : IVending
     {
         private readonly int[] DENOMINATIONS = { 1, 5, 10, 20, 50, 100, 500, 1000 };
-        List<Product> products;
-        int amountOfMoney;
+        private List<Product> products;
+        private int moneyPool;
+
+        public VendingMachine(List<Product> products, int moneyPool)
+        {
+            this.Products = products;
+            this.MoneyPool = moneyPool;
+
+        }
+
+        public int MoneyPool { get => moneyPool; set => moneyPool = value; }
+        public List<Product> Products { get => products; set => products = value; }
 
         public void InsertMoney(int amount)
         {
             if (IsInDenominations(amount))
             {
-                amountOfMoney += amount;
+                MoneyPool += amount;
             }
             else
             {
-                throw new ArgumentException("You must insert a valid denominaion.");
+                throw new ArgumentException("You must insert a valid denomination.");
             }
         }
 
@@ -27,7 +38,7 @@ namespace VendingMachine
             throw new NotImplementedException();
         }
 
-        public void ShowAll()
+        public string ShowAll()
         {
             throw new NotImplementedException();
         }
