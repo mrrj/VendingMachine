@@ -6,8 +6,24 @@ namespace VendingMachine.Model
 {
     class Drink : Product
     {
-        public Drink(int price, string info, string howToUse) : base(price, info, howToUse)
+        private string taste;
+
+        public Drink(string taste,
+            int price, 
+            string howToUse, 
+            string info) 
+            : base(price, howToUse, info)
         {
+            this.Taste = taste;
+        }
+
+        public string Taste { get => taste; set => taste = value; }
+
+        public override string Examine()
+        {
+            return $"Info: {this.Info}\n Price: {this.Price}\n Taste: {this.Taste}\n";
         }
     }
+
+    
 }

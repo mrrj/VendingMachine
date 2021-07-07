@@ -7,27 +7,29 @@ namespace VendingMachine
     abstract class Product
     {
         int price;
-        string info;
         string howToUse;
+        string info;
 
-        public Product(int price, string info, string howToUse)
+        public Product(int price, string howToUse, string info)
         {
             this.Price = price;
-            this.Info = info;
             this.HowToUse = howToUse;
+            this.Info = info;
         }
 
         public int Price { get => price; set => price = value; }
-        public string Info { get => info; set => info = value; }
         public string HowToUse { get => howToUse; set => howToUse = value; }
+        public string Info { get => info; set => info = value; }
 
-        public string Examine()
-        {
-            return $"info: {Info}\n price: {Price}\n";
-        }
+        public abstract string Examine();
         public string Use()
         {
             return $"Instructions: {HowToUse}";
+        }
+
+        public override string ToString()
+        {
+            return $"{Info}\n";
         }
 
     }

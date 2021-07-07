@@ -33,12 +33,24 @@ namespace VendingMachine
             }
         }
 
-        public Product Purchase()
+        public void Purchase(Product product)
         {
             throw new NotImplementedException();
         }
 
         public string ShowAll()
+        {
+            StringBuilder showAll = new StringBuilder();
+
+            foreach(Product prod in Products)
+            {
+                showAll.AppendLine(prod.Examine());
+            }
+            
+            return showAll.ToString();
+        }
+
+        Dictionary<Product, int> EndTransaction()
         {
             throw new NotImplementedException();
         }

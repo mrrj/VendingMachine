@@ -6,8 +6,21 @@ namespace VendingMachine.Model
 {
     class Snack : Product
     {
-        public Snack(int price, string info, string howToUse) : base(price, info, howToUse)
+        private string nutritionInfo;
+        public Snack(string nutritionInfo, 
+            int price, 
+            string howToUse, 
+            string info) 
+            : base(price, howToUse, info)
         {
+            this.NutritionInfo = nutritionInfo;
+        }
+
+        public string NutritionInfo { get => nutritionInfo; set => nutritionInfo = value; }
+
+        public override string Examine()
+        {
+            return $"Info: {this.Info}\n Price: {this.Price}\n Nutrition info: {this.NutritionInfo}\n";
         }
     }
 }

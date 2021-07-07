@@ -6,10 +6,10 @@ namespace VendingMachine.Model
 {
     interface IVending
     {
-        public Product Purchase();
+        public void Purchase(Product product);
         public string ShowAll();
         public void InsertMoney(int amount);
-        //public Dictionary<> EndTransaction()
+        public Dictionary<Product, int> EndTransaction();
 
     }
 }
