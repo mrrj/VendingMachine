@@ -9,7 +9,7 @@ namespace VendingMachine.Model
         public void Purchase(Product product);
         public string ShowAll();
         public void InsertMoney(int amount);
-        public Dictionary<Product, int> EndTransaction();
+        public Dictionary<int, int> EndTransaction();
 
     }
 }

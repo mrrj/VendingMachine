@@ -7,7 +7,7 @@ namespace VendingMachine
 {
     class VendingMachine : IVending
     {
-        private readonly int[] DENOMINATIONS = { 1, 5, 10, 20, 50, 100, 500, 1000 };
+        private readonly int[] DENOMINATIONS = { 1000, 500, 100, 50, 20, 10, 5, 1 }; 
         private List<Product> products;
         private int moneyPool;
 
@@ -35,7 +35,16 @@ namespace VendingMachine
 
         public void Purchase(Product product)
         {
-            throw new NotImplementedException();
+            if (products.Contains(product))
+            {
+                if (moneyPool >= product.Price)
+                {
+                    moneyPool -= product.Price;
+                    Products.Remove(product);
+                }
+                else throw new Exception("You have not inserted enough money.");
+            }
+            else throw new Exception("The product does not exist.");
         }
 
         public string ShowAll()
@@ -50,10 +59,23 @@ namespace VendingMachine
             return showAll.ToString();
         }
 
-        Dictionary<Product, int> EndTransaction()
+        public Dictionary<int, int> EndTransaction()
         {
-            throw new NotImplementedException();
+            Dictionary<int, int> changeInDenominaions = new Dictionary<int, int>();
+
+            for (int i = 0; i < DENOMINATIONS.Length)
+            {
+                int denomination = DENOMINATIONS[i];
+                int numberOfCoins = moneyPool % DENOMINATIONS[i];
+                changeInDenominaions.Add(denomination, numberOfCoins);
+            }
+
+            return changeInDenominaions;
         }
+
+
+
+
 
         private bool IsInDenominations(int amount)
         {
