@@ -10,7 +10,7 @@ namespace VendingMachine
         string howToUse;
         string info;
 
-        public Product(int price, string howToUse, string info)
+        public Product(string info, int price, string howToUse)
         {
             this.Price = price;
             this.HowToUse = howToUse;

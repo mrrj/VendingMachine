@@ -7,25 +7,31 @@ namespace VendingMachine
 {
     class VendingMachine : IVending
     {
-        private readonly int[] DENOMINATIONS = { 1000, 500, 100, 50, 20, 10, 5, 1 }; 
+        private readonly int[] DENOMINATIONS = { 1, 5, 10, 20, 50, 100, 500, 100 };
         private List<Product> products;
-        private int moneyPool;
+        private Dictionary<int,int> moneyPool;
 
-        public VendingMachine(List<Product> products, int moneyPool)
+        public VendingMachine(List<Product> products)
         {
             this.Products = products;
-            this.MoneyPool = moneyPool;
+            foreach(int i in DENOMINATIONS)
+            {
+                moneyPool.Add(i, 0);
+            }
 
         }
 
-        public int MoneyPool { get => moneyPool; set => moneyPool = value; }
+        public Dictionary<int,int> MoneyPool { get => moneyPool; set => moneyPool = value; }
         public List<Product> Products { get => products; set => products = value; }
 
         public void InsertMoney(int amount)
         {
             if (IsInDenominations(amount))
             {
-                MoneyPool += amount;
+                int value = MoneyPool.GetValueOrDefault(amount);
+                value += amount;
+                moneyPool[amount] = value;
+
             }
             else
             {
@@ -37,9 +43,9 @@ namespace VendingMachine
         {
             if (products.Contains(product))
             {
-                if (moneyPool >= product.Price)
+                if (this.TotalAmountOfMoney() >= product.Price)
                 {
-                    moneyPool -= product.Price;
+                    moneyPool[product.Price] -= product.Price;
                     Products.Remove(product);
                 }
                 else throw new Exception("You have not inserted enough money.");
@@ -51,39 +57,49 @@ namespace VendingMachine
         {
             StringBuilder showAll = new StringBuilder();
 
-            foreach(Product prod in Products)
+            foreach (Product prod in Products)
             {
                 showAll.AppendLine(prod.Examine());
             }
-            
             return showAll.ToString();
         }
 
         public Dictionary<int, int> EndTransaction()
         {
-            Dictionary<int, int> changeInDenominaions = new Dictionary<int, int>();
+            Dictionary<int, int> change = new Dictionary<int, int>();
 
-            for (int i = 0; i < DENOMINATIONS.Length)
+            foreach(KeyValuePair<int, int> pair in moneyPool)
             {
-                int denomination = DENOMINATIONS[i];
-                int numberOfCoins = moneyPool % DENOMINATIONS[i];
-                changeInDenominaions.Add(denomination, numberOfCoins);
+                if (pair.Value != 0)
+                {
+                    change.Add(pair.Key, pair.Value);
+                }
             }
-
-            return changeInDenominaions;
+            return change;
         }
 
 
+        private int TotalAmountOfMoney()
+        {
+            int sum = 0;
 
+            foreach(int i in moneyPool.Values)
+            {
+                sum += i;
+            }
+
+            return sum;
+        }
 
 
         private bool IsInDenominations(int amount)
         {
-            foreach(int i in DENOMINATIONS)
+            for(int i = 0; i < DENOMINATIONS.Length; i++)
             {
                 if (amount == DENOMINATIONS[i]) return true;
             }
             return false;
         }
+
     }
 }

@@ -9,11 +9,13 @@ namespace VendingMachine.Model
     {
         private bool batteryPowered;
 
-        public Toy(bool batteryPowered, 
-            int price, 
-            string howToUse, 
-            string info) 
-            : base(price, howToUse, info)
+        public Toy(
+            string info,
+            int price,
+            string howToUse,
+            bool batteryPowered
+            ) 
+            : base(info, price, howToUse)
         {
             this.BatteryPowered = batteryPowered;
         }

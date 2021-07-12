@@ -7,11 +7,13 @@ namespace VendingMachine.Model
     class Snack : Product
     {
         private string nutritionInfo;
-        public Snack(string nutritionInfo, 
+        public Snack(
+            string info,
             int price, 
-            string howToUse, 
-            string info) 
-            : base(price, howToUse, info)
+            string howToUse,           
+            string nutritionInfo
+            ) 
+            : base(info, price, howToUse)
         {
             this.NutritionInfo = nutritionInfo;
         }

@@ -8,11 +8,13 @@ namespace VendingMachine.Model
     {
         private string taste;
 
-        public Drink(string taste,
+        public Drink(
+            string info,
             int price, 
-            string howToUse, 
-            string info) 
-            : base(price, howToUse, info)
+            string howToUse,
+            string taste
+            ) 
+            : base(info, price, howToUse)
         {
             this.Taste = taste;
         }
