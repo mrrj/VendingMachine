@@ -19,4 +19,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VendingMachine\VendingMachine.csproj" />
+  </ItemGroup>
+
 </Project>

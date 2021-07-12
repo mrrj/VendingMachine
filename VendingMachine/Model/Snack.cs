@@ -4,7 +4,7 @@ using System.Text;
 
 namespace VendingMachine.Model
 {
-    class Snack : Product
+    public class Snack : Product
     {
         private string nutritionInfo;
         public Snack(

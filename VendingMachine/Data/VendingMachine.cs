@@ -5,7 +5,7 @@ using VendingMachine.Model;
 
 namespace VendingMachine
 {
-    class VendingMachine : IVending
+    public class VendingMachine : IVending
     {
         private readonly int[] DENOMINATIONS = { 1, 5, 10, 20, 50, 100, 500, 1000 };
         private List<Product> products;
@@ -68,18 +68,21 @@ namespace VendingMachine
         {
             Dictionary<int, int> change = new Dictionary<int, int>();
 
-            foreach(KeyValuePair<int, int> pair in moneyPool)
+            for(int i = 0; i < DENOMINATIONS.Length; i++)
             {
-                if (pair.Value != 0)
+                int key = DENOMINATIONS[i];
+                int value = moneyPool[key];
+                if (value != 0)
                 {
-                    change.Add(pair.Key, pair.Value);
+                    change.Add(key, value);
+                    moneyPool[key] = 0;
                 }
             }
             return change;
         }
 
 
-        private int TotalAmountOfMoney()
+        public int TotalAmountOfMoney()
         {
             int sum = 0;
 
@@ -92,7 +95,7 @@ namespace VendingMachine
         }
 
 
-        private bool IsInDenominations(int amount)
+        public bool IsInDenominations(int amount)
         {
             for(int i = 0; i < DENOMINATIONS.Length; i++)
             {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace VendingMachine.Model
 {
-    interface IVending
+    public interface IVending
     {
         public void Purchase(Product product);
         public string ShowAll();

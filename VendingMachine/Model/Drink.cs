@@ -4,7 +4,7 @@ using System.Text;
 
 namespace VendingMachine.Model
 {
-    class Drink : Product
+    public class Drink : Product
     {
         private string taste;
 

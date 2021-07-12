@@ -5,7 +5,7 @@ using System.Text;
 
 namespace VendingMachine.Model
 {
-    class Toy : Product
+    public class Toy : Product
     {
         private bool batteryPowered;
 
