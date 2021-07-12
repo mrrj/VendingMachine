@@ -23,7 +23,7 @@ namespace VendingMachine.Model
         public bool BatteryPowered { get => batteryPowered; set => batteryPowered = value; }
         public override string Examine()
         {
-            return $"Info: {this.Info}\n Price: {this.Price}\n {IsBatteryPowered()}\n";
+            return $"Info: {this.Info}\nPrice: {this.Price}\nRequires batteries: {IsBatteryPowered()}\n";
         }
 
         public string IsBatteryPowered()

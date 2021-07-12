@@ -22,7 +22,7 @@ namespace VendingMachine.Model
 
         public override string Examine()
         {
-            return $"Info: {this.Info}\n Price: {this.Price}\n Nutrition info: {this.NutritionInfo}\n";
+            return $"Info: {this.Info}\nPrice: {this.Price}\nNutrition info: {this.NutritionInfo}\n";
         }
     }
 }

@@ -9,6 +9,7 @@ namespace VendingMachine
     {
         static void Main(string[] args)
         {
+
             List<Product> prods = new List<Product>();
 
             Toy toy = new Toy("Car", 10, "Roll it on the floor", false);
@@ -21,7 +22,8 @@ namespace VendingMachine
             string seeProds = vm.ShowAll();
 
             Console.WriteLine(seeProds);
-            vm.InsertMoney(50);
+            vm.InsertMoney(10);
+            vm.InsertMoney(20);
             vm.Purchase(toy);
 
             Dictionary<int, int> change = vm.EndTransaction();

@@ -7,16 +7,16 @@ namespace VendingMachine
 {
     class VendingMachine : IVending
     {
-        private readonly int[] DENOMINATIONS = { 1, 5, 10, 20, 50, 100, 500, 100 };
+        private readonly int[] DENOMINATIONS = { 1, 5, 10, 20, 50, 100, 500, 1000 };
         private List<Product> products;
-        private Dictionary<int,int> moneyPool;
+        private Dictionary<int,int> moneyPool = new Dictionary<int, int>();
 
         public VendingMachine(List<Product> products)
         {
             this.Products = products;
-            foreach(int i in DENOMINATIONS)
+            for(int i = 0; i < DENOMINATIONS.Length; i++)
             {
-                moneyPool.Add(i, 0);
+                moneyPool.Add(DENOMINATIONS[i], 0);
             }
 
         }
@@ -35,7 +35,7 @@ namespace VendingMachine
             }
             else
             {
-                throw new ArgumentException("You must insert a valid denomination.");
+                throw new Exception("You must insert a valid denomination.");
             }
         }
 
